@@ -1,0 +1,23 @@
+{
+  "name": "playsight-ai",
+  "private": true,
+  "description": "AI-powered sports intelligence platform — highlights, heatmaps, analytics from smartphone footage",
+  "workspaces": [
+    "apps/*",
+    "services/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev -w @playsight/web",
+    "dev:mobile": "npm run start -w @playsight/mobile",
+    "dev:ingest": "npm run dev -w @playsight/ingest",
+    "dev:vision": "npm run dev -w @playsight/vision",
+    "build": "npm run build -w @playsight/shared && npm run build -w @playsight/ingest && npm run build -w @playsight/vision && npm run build -w @playsight/web",
+    "deploy": "docker compose up -d --build",
+    "health": "curl -fsS http://localhost:3000/health && echo \"\\nOK\""
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm"
+}

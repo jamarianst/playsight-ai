@@ -1,0 +1,10 @@
+{
+  "name": "playsight-ai-api",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "services/ingest",
+    "packages/shared"
+  ],
+  "engines": { "node": ">=18" }
+}

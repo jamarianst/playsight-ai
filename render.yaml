@@ -1,0 +1,48 @@
+# Render Blueprint — PlaySight AI
+# Deploy: connect repo in Render Dashboard → New → Blueprint → select this file.
+# Then create the static site manually (see docs/DEPLOY_WEB.md) and set VITE_API_URL to your API URL.
+
+services:
+  - type: keyvalue
+    name: playsight-redis
+
+  - type: web
+    name: playsight-api
+    runtime: docker
+    dockerfilePath: ./docker/api.Dockerfile
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: playsight-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: keyvalue
+          name: playsight-redis
+          property: connectionString
+    # Add S3_* or storage env vars in Dashboard for production uploads
+
+  - type: worker
+    name: playsight-worker
+    runtime: docker
+    dockerfilePath: ./docker/worker.Dockerfile
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: playsight-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: keyvalue
+          name: playsight-redis
+          property: connectionString
+
+databases:
+  - name: playsight-db
+    plan: free

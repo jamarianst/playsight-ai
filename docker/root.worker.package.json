@@ -1,0 +1,7 @@
+{
+  "name": "playsight-ai-worker",
+  "private": true,
+  "type": "module",
+  "workspaces": ["services/vision"],
+  "engines": { "node": ">=18" }
+}
