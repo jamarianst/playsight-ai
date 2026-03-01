@@ -10,6 +10,7 @@ services:
     name: playsight-api
     runtime: docker
     dockerfilePath: ./docker/api.Dockerfile
+    ipAllowList: []   # 👈 ADD THIS
     envVars:
       - key: NODE_ENV
         value: production
@@ -30,6 +31,7 @@ services:
     name: playsight-worker
     runtime: docker
     dockerfilePath: ./docker/worker.Dockerfile
+    ipAllowList: [] 
     envVars:
       - key: NODE_ENV
         value: production
