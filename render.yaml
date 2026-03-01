@@ -5,6 +5,7 @@
 services:
   - type: keyvalue
     name: playsight-redis
+    ipAllowList: []   # REQUIRED for services[0]
 
   - type: web
     name: playsight-api
@@ -31,7 +32,7 @@ services:
     name: playsight-worker
     runtime: docker
     dockerfilePath: ./docker/worker.Dockerfile
-    ipAllowList: [] 
+   
     envVars:
       - key: NODE_ENV
         value: production
